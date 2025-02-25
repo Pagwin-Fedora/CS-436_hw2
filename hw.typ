@@ -78,7 +78,10 @@ $f(x,y)=2x^2+y^2+3sin(2 pi x)cos(2 pi y)$
 // TODO
 = Using the MNIST dataset only considering the digits 1 and 5 (other digits must be removed) do the following.
 
+see filter.py for details on how this filtering was done
+
 == Familiarize yourself with the dataset by giving a plot of the first two digits in ZipDigits.train.
+
 
 Hint: If you are using the Python programming language, you may use matplotlib.pyplot.imshow which takes a 2-D array as input. You may refer to the documentation on how to display a grayscale image.
 
