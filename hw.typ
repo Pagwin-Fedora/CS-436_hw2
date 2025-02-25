@@ -1,12 +1,12 @@
 #set heading(numbering: "1.a.i)")
 #show strike: it =>[
-    #set text(red)
     #it
 ]
 
 // TOTAL: 1500
 
 #let E(str) = $E_(str)$
+#let skip = text(fill:red)[SKIPPED]
 
 // Q1 (200)
 // DONE
@@ -26,6 +26,7 @@ It makes it harder to lower $E("in")$ which is a pre-requisite for lowering $E("
 // NOPE
 = #strike[For an $H$ with $d_("VC") = 10$, what sample size do you need (as prescribed by the generalization bound) to have a $95%$ confidence that your generalization error is at most 0.05?]
 
+#skip
 
 //Q3 (400)
 = Consider a simplified learning scenario. Assume that the input dimension is one. Assume that the input variable $x$ is uniformaly distributed in the interval $\[-1,1\]$. The data set consists of 2 points ${x_1,x_2}$ and assume that the target function is $f(x) = x^2$. Thus, the full data set is $D = {(x_1, x^2_1), (x_2,x^2_2)}$. The learning algorithm returns the line fitting these two points as $g$ ($H$ consists of functions of the form $h(x)=a x + b$). We are interested in the test performance ($E("out")$) of our learning system with respect to the squared error measure, the bias and the var.
@@ -47,9 +48,11 @@ Pick $n$ pairs of points, for each pair calculate the line of best fit, calculat
 // NOPE
 == #strike[Run your experiment and report the result. Compare $E("out")$ with bias+var. Provide a plot of your $ag(x)$ and $f(x)$ (on the same plot).]
 
+#skip
 // nope
 == #strike[Compute analytically what $E("out")$, bias and var should be.]
 
+#skip
 //Q4 (200)
 #strike[
 = Compute gradient descent on $f$ 
@@ -82,30 +85,33 @@ see filter.py for details on how this filtering was done
 
 == Familiarize yourself with the dataset by giving a plot of the first two digits in ZipDigits.train.
 
+#figure(image("Figure_1.png", width: 256pt), caption: "First digit in mnist data")
+#figure(image("Figure_2.png", width:256pt), caption: "Second digit in mnist data")
 
-Hint: If you are using the Python programming language, you may use matplotlib.pyplot.imshow which takes a 2-D array as input. You may refer to the documentation on how to display a grayscale image.
-
+// NOPE (maybe)
 == Develop two features to measure properties of the image that would be useful in distinguishing between the digits 1 and 5. You may use average intensity and symmetry (defined in LFD Example 3.1) as your two features, or define and compute any other features you think are better suited to help distinguish between 1 and 5. Provide a mathematical definition of the two features you compute using the notation discussed in class.
 
+#skip
+
+// NOPE (maybe)
 == Provide a 2-D scatter plot of the examples in ZipDigits.train w.r.t. the two features you defined in Part (b), similarly to the scatter plot in LFD Example 3.1 and elsewhere in LFD Chapter 3. For each example, plot the values of the two features with a red ‘×’ marker if it is a 5 and and a blue ‘◦’ marker if it is a 1. You must clearly label each axis with the feature it represents, and it should be possible to determine for each data point, the values of the two features you computed. You must also include a legend on the upper right corner of your scatter plot which clearly identifies that data points marked with ‘×’ represent examples of the digit 5 those marked ‘◦’ marker represent examples of the digit 1.
 
-Additional tips for plotting:
-
-- You may find it useful in the long run to use matplotlib.pyplot.subplots to generate both a matplotlib.figure.Figure object and one or more matplotlib.axes.Axes objects. At a high level, you may think of the Figure object as a sort of canvas that gets displayed or saved as a file and the Axes object as a collection of plot elements that need to be printed onto the canvas. Each Axes object may therefore refer to a different collection of plot elements that together make up a plot and you get to pick where it gets printed on the canvas or let the library decide it for you. Therefore, it will often be useful to maintain a pointer to the Axes objects of interest so you can manipulate them and add different plot elements like axis labels, legends, and so forth.
-For more details, you may find this article and this article to be of interest.
-- To add a legend to your plot, you may find this guide and this guide.
-- To manually control how the values along each axis are marked, you may use
-matplotlib.axes.Axes.set xticks and matplotlib.axes.Axes.set yticks, and find
-this guide helpful.
-- If you are having trouble printing your image, you may use matplotlib.pyplot.tight layout. Its use
-is documented in this guide.
+#skip
 
 //Q6 (500)
 // TODO
 = Train a classifier using linear regression via pocket algorithm or logistic regression using gradient descent +1 for 1 -1 for 5. Using the clasifier
 
+Training process in train.py, run via run.py
+
+// NOPE (dependant on 5b)
 == Give separate plots of the training data (ZipDigits.train) and test data (ZipDigits.test) which display the data points using the two features you computed in HW2, together with the separator.
 
+// 
 == Compute $E("in")$ on your training data (ZipDigits.train) and $E("test")$, the error of your separator on the test data (ZipDigits.test).
 
-== Obtain a bound on the true out-of-sample error (Eout). You should get two bounds, one based on $E("in")$ and another based on $E("test")$. Use a tolerance of $delta = 0.05$. Which is the better bound?
+
+// Nope
+== Obtain a bound on the true out-of-sample error ($E("out")$. You should get two bounds, one based on $E("in")$ and another based on $E("test")$. Use a tolerance of $delta = 0.05$. Which is the better bound?
+
+#skip
