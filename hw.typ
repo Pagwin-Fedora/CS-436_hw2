@@ -1,39 +1,65 @@
 #set heading(numbering: "1.a.i)")
+#show strike: it =>[
+    #set text(red)
+    #it
+]
+
+// TOTAL: 1500
 
 #let E(str) = $E_(str)$
 
-// Q1
+// Q1 (200)
+// DONE
 = A data set has 600 examples. To properly test the performance of the final hypothesis, you set aside a randomly selected subset of 200 examples which are never used in the training phase; these form a test se. You use a learning model with 1,000 hypotheses and select the final hypothesis $g$ based on 400 training examples. We wish to estimate $E("out")(g)$. We have acces to two estimates: $E("in")(g)$, the in sample error on the 400 training examples; and, $E("test")(g)$, the test error on the 200 test examples that were set aside.
 
 == Using a 5% error tolerance ($delta = 0.05$), which estimate has the higher 'error bar'
 
+$ E("out")(g) lt.eq E("in")(g) + sqrt(1/(2N)ln(2(m_H (N))/delta)) $
 
+not sure how to plug into Hoeffding’s Bound to get actual numbers but I'd expect the estimate with #E("in") to have larger error bars due to over fitting
 
 == Is there any reason why you shouldn't reserve even more examples for testing?
 
-//Q2
-= For an $H$ with $d_("VC") = 10$, what sample size do you need (as prescribed by the generalization bound) to have a $95%$ confidence that your generalization error is at most 0.05?
+It makes it harder to lower $E("in")$ which is a pre-requisite for lowering $E("out")$
 
-//Q3
+//Q2 (100)
+// NOPE
+= #strike[For an $H$ with $d_("VC") = 10$, what sample size do you need (as prescribed by the generalization bound) to have a $95%$ confidence that your generalization error is at most 0.05?]
+
+
+//Q3 (400)
 = Consider a simplified learning scenario. Assume that the input dimension is one. Assume that the input variable $x$ is uniformaly distributed in the interval $\[-1,1\]$. The data set consists of 2 points ${x_1,x_2}$ and assume that the target function is $f(x) = x^2$. Thus, the full data set is $D = {(x_1, x^2_1), (x_2,x^2_2)}$. The learning algorithm returns the line fitting these two points as $g$ ($H$ consists of functions of the form $h(x)=a x + b$). We are interested in the test performance ($E("out")$) of our learning system with respect to the squared error measure, the bias and the var.
 
 #let ag = $overline(g)$
 
+// DONE
 == Give the analytic expression for the average function $ag(x)$
 
+//https://www.wolframalpha.com/input?i2d=true&i=Divide%5B1%2C4%5DIntegrate%5BIntegrate%5BDivide%5BPower%5Ba%2C2%5D-Power%5Bb%2C2%5D%2Ca-b%5D%5C%2840%29x-b%5C%2841%29%2BPower%5Bb%2C2%5D%2C%7Bb%2C-1%2C1%7D%5D%2C%7Ba%2C-1%2C1%7D%5D
+// (1)^2x/4-(-1)^2x/4 = x/4 - x/4= 0
+$ ag(x)=1/4 integral_(-1)^(1)(integral_(-1)^(1)((a^2-b^2)/(a-b)(x-b)+b^(2))"db") "da" = 0$
+
+// DONE
 == Describe an experiment that you could run to determine (numerically) $ag(x)$, $E("out")$, bias, and variance
 
-== Run your experiment and report the result. Compare $E("out")$ with bias+var. Provide a plot of your $ag(x)$ and $f(x)$ (on the same plot).
+Pick $n$ pairs of points, for each pair calculate the line of best fit, calculate #E("out") then using the results of that calculate average function, bias and variance
 
-== Compute analytically what $E("out")$, bias and var should be.
+// NOPE
+== #strike[Run your experiment and report the result. Compare $E("out")$ with bias+var. Provide a plot of your $ag(x)$ and $f(x)$ (on the same plot).]
 
-//Q4
+// nope
+== #strike[Compute analytically what $E("out")$, bias and var should be.]
+
+//Q4 (200)
+#strike[
 = Compute gradient descent on $f$ 
 
 $f(x,y)=2x^2+y^2+3sin(2 pi x)cos(2 pi y)$
 
+// NO
 == starting from the point $(0.1, 0.1)$. Learning rate of 0.01, and 50 iterations. Give a plot that displays how the function value drops through successive iterations of gradient descent. Repeat this with a learning rate of 0.1 and provide a function plot with each iteration
 
+// NO
 == Obtain the “minimum” value and location of the minimum value of the function you get using gradient descent with the same learning rate 0f 0.01 and 50 iterations from the following start points. Write the minimum value for each
 
 === (0.1,0.1)
@@ -47,8 +73,9 @@ $f(x,y)=2x^2+y^2+3sin(2 pi x)cos(2 pi y)$
 === (-0.5, -0.5)
 
 === (-1, -1)
-
-//Q5
+]
+//Q5 (100)
+// TODO
 = Using the MNIST dataset only considering the digits 1 and 5 (other digits must be removed) do the following.
 
 == Familiarize yourself with the dataset by giving a plot of the first two digits in ZipDigits.train.
@@ -70,7 +97,8 @@ this guide helpful.
 - If you are having trouble printing your image, you may use matplotlib.pyplot.tight layout. Its use
 is documented in this guide.
 
-//Q6
+//Q6 (500)
+// TODO
 = Train a classifier using linear regression via pocket algorithm or logistic regression using gradient descent +1 for 1 -1 for 5. Using the clasifier
 
 == Give separate plots of the training data (ZipDigits.train) and test data (ZipDigits.test) which display the data points using the two features you computed in HW2, together with the separator.
