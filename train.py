@@ -1,7 +1,7 @@
-from _typeshed import SupportsRead, SupportsWrite
 import sys
 import random
 import json
+import math
 from typing import Tuple
 
 # setting up rng so I can print the seed
@@ -24,15 +24,40 @@ def main():
     print(f"seed: {seed}")
     # initialize random matrix
     model = Matrix.random(1, 256)
-
-    # process of learning via pocket method
-    best = model
+    visited = []
     for digit in digits:
-        ...
+        desired = 0
+        match digit[0]:
+            case 1:
+                desired = 1
+            case 5:
+                desired = -1
+            case _:
+                raise Exception("???")
+        prediction = super_ceil(clamp((model @ Matrix.col(digit[1:])).to_scalar()))
+        adjusted = adjust(model, digit[1:], prediction == desired)
+        model = better(model, adjusted, visited)
+        visited.append(digit)
+
     print(f"training done writing model to file `{sys.argv[2]}`", sys.stderr)
     with open(sys.argv[2], "w+") as output:
-        best.dump(output)
+        model.dump(output)
     print(f"finished writing model to file")
+
+
+def adjust(m: "Matrix", point: list[float | int], correct: bool) -> "Matrix": ...
+def better(a: "Matrix", b: "Matrix", prior: list[list[float | int]]) -> "Matrix": ...
+
+
+def clamp(x: float | int, mi: float | int = -1, ma: float | int = 1):
+    return max(min(x, ma), mi)
+
+
+def super_ceil(x: float | int):
+    if x < 0:
+        return math.floor(x)
+    else:
+        math.ceil(x)
 
 
 # I think i'm not allowed to use numpy so I wrote my own Matrix class
@@ -71,13 +96,18 @@ class Matrix:
             raise Exception("cannot convert to list if rows or columns is not 1")
         return self._underlying
 
+    def to_scalar(self) -> float:
+        if self._row_count == 1 and self._column_count == 1:
+            return self._underlying[0]
+        raise Exception("cannot convert matrix to scalar if it isn't 1x1")
+
     # added so I can copy paste
     @staticmethod
-    def load(file: SupportsRead[str | bytes]):
+    def load(file):
         obj: dict = json.load(file)
         return Matrix(obj["rows"], obj["columns"], obj["data"])
 
-    def dump(self, file: SupportsWrite[str]):
+    def dump(self, file):
         obj = dict()
         obj["rows"] = self._row_count
         obj["columns"] = self._column_count
@@ -105,6 +135,14 @@ class Matrix:
             self._column_count,
             [a - b for a, b in zip(self._underlying, rhs._underlying)],
         )
+
+    def __repr__(self) -> str:
+        ret = ""
+        for r in range(self._row_count):
+            for c in range(self._column_count):
+                ret += str(self[r, c]) + " "
+            ret += "\n"
+        return ret[:-1]
 
     def __matmul__(self, rhs: "Matrix") -> "Matrix":
         match rhs:
