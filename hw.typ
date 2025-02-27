@@ -2,7 +2,9 @@
 #show strike: it =>[
     #it
 ]
-
+#show link: it =>[
+    #underline(text(it, fill:blue))
+]
 // TOTAL: 1500
 
 #let E(str) = $E_(str)$
@@ -81,9 +83,11 @@ $f(x,y)=2x^2+y^2+3sin(2 pi x)cos(2 pi y)$
 // TODO
 = Using the MNIST dataset only considering the digits 1 and 5 (other digits must be removed) do the following.
 
-see filter.py for details on how this filtering was done
+see #link("https://github.com/Pagwin-Fedora/CS-436_hw2/blob/main/filter.py")[filter.py] for details on how this filtering was done
 
 == Familiarize yourself with the dataset by giving a plot of the first two digits in ZipDigits.train.
+
+see #link("https://github.com/Pagwin-Fedora/CS-436_hw2/blob/main/plot.py")[plot.py] for how the plots were made (the filtered version of ZipDigits.train was given as a cli argument)
 
 #figure(image("Figure_1.png", width: 256pt), caption: "First digit in mnist data")
 #figure(image("Figure_2.png", width:256pt), caption: "Second digit in mnist data")

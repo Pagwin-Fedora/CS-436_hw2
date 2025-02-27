@@ -4,6 +4,8 @@ import json
 import math
 from typing import Tuple
 
+# if you explored the repo I made and found this file or run.py, the reason I didn't finish them is due to determining that the additional late penalty + effort wouldn't be worth the points gained
+
 # setting up rng so I can print the seed
 seed = random.randrange(sys.maxsize)
 # set seed here if result needs to be recreated
@@ -45,7 +47,9 @@ def main():
     print(f"finished writing model to file")
 
 
+# my understanding is that  this is just subtracting the point(after the number) from the matrix if the guess was wrong
 def adjust(m: "Matrix", point: list[float | int], correct: bool) -> "Matrix": ...
+# just see which model classifies more points correctly and return it
 def better(a: "Matrix", b: "Matrix", prior: list[list[float | int]]) -> "Matrix": ...
 
 
