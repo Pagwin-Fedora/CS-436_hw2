@@ -99,17 +99,16 @@ see filter.py for details on how this filtering was done
 #skip
 
 //Q6 (500)
-// TODO
 = Train a classifier using linear regression via pocket algorithm or logistic regression using gradient descent +1 for 1 -1 for 5. Using the clasifier
 
-Training process in train.py, run via run.py
 
 // NOPE (dependant on 5b)
 == Give separate plots of the training data (ZipDigits.train) and test data (ZipDigits.test) which display the data points using the two features you computed in HW2, together with the separator.
 
-// 
+// NOPE
 == Compute $E("in")$ on your training data (ZipDigits.train) and $E("test")$, the error of your separator on the test data (ZipDigits.test).
 
+#skip
 
 // Nope
 == Obtain a bound on the true out-of-sample error ($E("out")$. You should get two bounds, one based on $E("in")$ and another based on $E("test")$. Use a tolerance of $delta = 0.05$. Which is the better bound?
